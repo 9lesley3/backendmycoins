@@ -1,18 +1,21 @@
 from flask_restful import Resource
 from models.ModelCoin import ModelCoin
 from data.DataCoin import get_data_coin
+from flask_jwt_extended import jwt_required
 
 
 class Coin(Resource):
-    @staticmethod
-    def get(coin_id):
+    def get(self, coin_id):
         coin = ModelCoin.find_by_id(coin_id)
         if coin:
             return coin.to_json()
         return {'message': 'Coin not found.'}, 404
 
-    @staticmethod
-    def post(coin_id):
+    @jwt_required()
+    def post(self, coin_id):
+        print("--------")
+        print(coin_id)
+        print("--------")
         if ModelCoin.find_by_id(coin_id):
             return {'message': "Coin id '{} already exists.".format(coin_id)}, 400
 
@@ -26,8 +29,8 @@ class Coin(Resource):
 
         return coin.to_json()
 
-    @staticmethod
-    def put(coin_id):
+    @jwt_required()
+    def put(self, coin_id):
         data = get_data_coin()
         found_coin = ModelCoin.find_by_id(coin_id)
 
@@ -40,8 +43,8 @@ class Coin(Resource):
         coin.save_coin()
         return coin.to_json(), 201
 
-    @staticmethod
-    def delete(coin_id):
+    @jwt_required()
+    def delete(self, coin_id):
         coin = ModelCoin.find_by_id(coin_id)
         if coin:
             coin.delete_coin()

@@ -4,9 +4,8 @@ from data.DataUser import get_data_user
 
 
 class UserRegister(Resource):
-    @staticmethod
     # /register
-    def post():
+    def post(self):
         data = get_data_user()
         if ModelUser.find_by_login(data['login']):
             return {'message': "The login '{}' already exists.".format(data['login'])}

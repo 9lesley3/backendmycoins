@@ -6,19 +6,9 @@ from hmac import compare_digest
 
 
 class UserLogin(Resource):
-    @classmethod
-    def post(cls):
+    def post(self):
         data = get_data_user()
         user = ModelUser.find_by_login(data['login'])
-
-        print("-------------")
-        print(user.user_id)
-        print(user.login)
-        print(user.password)
-        print("-------------")
-        print(data['login'])
-        print(data['password'])
-        print("-------------")
 
         if user and compare_digest(user.password, data['password']):
             token_de_acesso = create_access_token(identity=user.user_id)
