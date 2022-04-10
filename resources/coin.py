@@ -1,102 +1,72 @@
 from flask_restful import Resource, reqparse
-
-value_id = 2
-coins = [
-    {
-        'coin_id': 0,
-        'description': 'Moeda de um real',
-        'value': 1,
-        'conservation_state': 'BC',
-        'country': 'Brazil',
-        'year': 2019
-    },
-    {
-        'coin_id': 1,
-        'description': 'Moeda de um real',
-        'value': 1,
-        'conservation_state': 'BC',
-        'country': 'Brazil',
-        'year': 2018
-    },
-    {
-        'coin_id': 2,
-        'description': 'Moeda de um real',
-        'value': 1,
-        'conservation_state': 'BC',
-        'country': 'Brazil',
-        'year': 2022
-    },
-]
-
-
-def update_coin_id():
-    global value_id
-    value_id = value_id + 1
+from models.ModelCoin import ModelCoin
 
 
 def get_data_coin():
     args = reqparse.RequestParser()
 
-    args.add_argument('description')
-    args.add_argument('value')
-    args.add_argument('conservation_state')
-    args.add_argument('country')
-    args.add_argument('year')
+    args.add_argument('description', type=str, required=True,
+                      help="The field 'description' cannot be left blank")
+    args.add_argument('value', type=float, required=True,
+                      help="The field 'value' cannot be left blank")
+    args.add_argument('conservation_state', type=str, required=True,
+                      help="The field 'conservation_state' cannot be left blank")
+    args.add_argument('country', type=str, required=True,
+                      help="The field 'country' cannot be left blank")
+    args.add_argument('year', type=int, required=True,
+                      help="The field 'year' cannot be left blank")
 
     data = args.parse_args()
     return data
 
 
-def add_coins():
-    data = get_data_coin()
-    new_coin = {'coin_id': value_id, **data}
-
-    coins.append(new_coin)
-    return new_coin
-
-
-def find_coin_by_id(coin_id):
-    for coin in coins:
-        if coin['coin_id'] == coin_id:
-            return coin
-
-
 class Coins(Resource):
     @staticmethod
     def get():
-        return coins
+        return {'coins': [coin.to_json() for coin in ModelCoin.query.all()]}
 
 
 class Coin(Resource):
     @staticmethod
     def get(coin_id):
-        coin = find_coin_by_id(coin_id)
+        coin = ModelCoin.find_coin(coin_id)
         if coin:
-            return coin
+            return coin.to_json()
         return {'message': 'Coin not found.'}, 404
 
     @staticmethod
     def post(coin_id):
-        update_coin_id()
-        new_coins = add_coins()
-        return new_coins, 200
+        if ModelCoin.find_coin(coin_id):
+            return {'message': "Coin id '{} already exists.".format(coin_id)}, 400
+
+        data = get_data_coin()
+        coin = ModelCoin(coin_id, **data)
+
+        try:
+            coin.save_coin()
+        except:
+            return {'message': 'An internal error occurred trying to save coin'}, 500
+
+        return coin.to_json()
 
     @staticmethod
     def put(coin_id):
         data = get_data_coin()
-        new_coin = {'coin_id': coin_id, **data}
+        found_coin = ModelCoin.find_coin(coin_id)
 
-        coin = find_coin_by_id(coin_id)
-        if coin:
-            coin.update(new_coin)
-            return new_coin, 200
-        coins.append(new_coin)
-        return new_coin, 201
+        if found_coin:
+            found_coin.update_coin(**data)
+            found_coin.save_coin()
+            return found_coin.to_json(), 200
+
+        coin = ModelCoin(coin_id, **data)
+        coin.save_coin()
+        return coin.to_json(), 201
 
     @staticmethod
     def delete(coin_id):
-        coin = find_coin_by_id(coin_id)
+        coin = ModelCoin.find_coin(coin_id)
         if coin:
-            coins.remove(coin)
+            coin.delete_coin()
             return {'message': 'Coin deleted.'}
         return {'message': 'Coin not found.'}, 404

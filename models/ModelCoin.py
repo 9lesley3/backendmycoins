@@ -1,7 +1,7 @@
 from sql_alchemy import database
 
 
-class CoinModel(database.Model):
+class ModelCoin(database.Model):
     __table_name__ = 'coins'
 
     coin_id = database.Column(database.Integer, primary_key=True)
@@ -38,4 +38,15 @@ class CoinModel(database.Model):
 
     def save_coin(self):
         database.session.add(self)
+        database.session.commit()
+
+    def update_coin(self, description, value, conservation_state, country, year):
+        self.description = description
+        self.value = value
+        self.conservation_state = conservation_state
+        self.country = country
+        self.year = year
+
+    def delete_coin(self):
+        database.session.delete(self)
         database.session.commit()

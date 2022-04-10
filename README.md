@@ -28,6 +28,9 @@ pip install Flask
 amos instalar também o Flask-Restful com o seguinte comando:
 pip install Flask-Restful
 
+instalando Flask-SQLAlchemy:
+pip install Flask-SQLAlchemy
+
 para descobrir quais pacotes foram instalados no seu ambiente, basta usar o seguinte comando:
 python -m pip list
 
@@ -40,5 +43,9 @@ pip install -r requirements.txt
 virtualenv - https://pythonacademy.com.br/blog/python-e-virtualenv-como-programar-em-ambientes-virtuais
 Flask - https://flask.palletsprojects.com/en/2.1.x/
 Flask-Restful - https://flask-restful.readthedocs.io/en/latest/
+
+Para inicializar o serviço de API de o seguinte comando:
+python3 app.py
+
 
 [comment]: <> (http://127.0.0.1:5000/coins)
