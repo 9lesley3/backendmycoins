@@ -2,7 +2,7 @@ from sql_alchemy import database
 
 
 class ModelCoin(database.Model):
-    __table_name__ = 'coins'
+    __tablename__ = 'coins'
 
     coin_id = database.Column(database.Integer, primary_key=True)
     description = database.Column(database.String(100))
@@ -30,7 +30,7 @@ class ModelCoin(database.Model):
         }
 
     @classmethod
-    def find_coin(cls, coin_id):
+    def find_by_id(cls, coin_id):
         coin = cls.query.filter_by(coin_id=coin_id).first()  # SELECT * FROM coins WHERE coin_id = $coin_id limited
         if coin:
             return coin

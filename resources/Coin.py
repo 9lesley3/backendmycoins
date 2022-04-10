@@ -20,12 +20,6 @@ def get_data_coin():
     return data
 
 
-class Coins(Resource):
-    @staticmethod
-    def get():
-        return {'coins': [coin.to_json() for coin in ModelCoin.query.all()]}
-
-
 class Coin(Resource):
     @staticmethod
     def get(coin_id):
