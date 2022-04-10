@@ -31,6 +31,9 @@ pip install Flask-Restful
 instalando Flask-SQLAlchemy:
 pip install Flask-SQLAlchemy
 
+instalando flask_jwt_extended
+pip install flask_jwt_extended
+
 para descobrir quais pacotes foram instalados no seu ambiente, basta usar o seguinte comando:
 python -m pip list
 
