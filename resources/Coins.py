@@ -12,42 +12,22 @@ def normalize_path(value_min=0.0,
                    offset=0,
                    **dados):
 
-    if conservation_state and country:
-        return {
-            'value_min': value_min,
-            'value_max': value_max,
-            'conservation_state': conservation_state,
-            'country': country,
-            'year_min': year_min,
-            'year_max': year_max,
-            'limit': limit,
-            'offset': offset}
-    if conservation_state:
-        return {
-            'value_min': value_min,
-            'value_max': value_max,
-            'conservation_state': conservation_state,
-            'year_min': year_min,
-            'year_max': year_max,
-            'limit': limit,
-            'offset': offset}
-    if country:
-        return {
-            'value_min': value_min,
-            'value_max': value_max,
-            'country': country,
-            'year_min': year_min,
-            'year_max': year_max,
-            'limit': limit,
-            'offset': offset}
+    normalized_result = {'value_min': value_min, 'value_max': value_max}
 
-    return {
-        'value_min': value_min,
-        'value_max': value_max,
-        'year_min': year_min,
-        'year_max': year_max,
-        'limit': limit,
-        'offset': offset}
+    if conservation_state and country:
+        normalized_result['conservation_state'] = conservation_state
+        normalized_result['country'] = country
+    if conservation_state:
+        normalized_result['conservation_state'] = conservation_state
+    if country:
+        normalized_result['country'] = country
+
+    normalized_result['year_min'] = year_min
+    normalized_result['year_max'] = year_max
+    normalized_result['limit'] = limit
+    normalized_result['offset'] = offset
+
+    return normalized_result
 
 
 def get_data_coins():
