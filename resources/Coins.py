@@ -45,17 +45,14 @@ def get_data_coins():
 
 
 def get_query(params):
-    if params.get('conservation_state') and params.get('country'):
-        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and conservation_state ? and country ? "\
-                "and (year >= ? and year <= ?) LIMIT ? OFFSET ? "
-    elif params.get('conservation_state'):
-        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and conservation_state ? and (year >= ? and " \
-                "year <= ?) LIMIT ? OFFSET ? "
-    elif params.get('country'):
-        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and country ? and (year >= ? and year <= ?) " \
-                "LIMIT ? OFFSET ? "
-    else:
-        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and (year >= ? and year <= ?) LIMIT ? OFFSET ? "
+    query = "SELECT * FROM coins WHERE (value >= ? and value <= ?) "
+    if params.get('conservation_state'):
+        query += "and (conservation_state = ?) "
+    if params.get('country'):
+        query += "and (country = ?) "
+    query += "and (year >= ? and year <= ?) LIMIT ? OFFSET ?"
+
+    return query
 
 
 def result_to_json(result):
@@ -85,6 +82,11 @@ class Coins(Resource):
         params = normalize_path(**data_valide)
         query = get_query(params)
         tuple_params = tuple([params[key] for key in params])
+        print("-----------")
+        print(query)
+        print(query)
+        print(params)
+        print("-----------")
         query_result = cursor.execute(query, tuple_params)
         result = result_to_json(result=query_result)
 

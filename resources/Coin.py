@@ -13,11 +13,8 @@ class Coin(Resource):
 
     @jwt_required()
     def post(self, coin_id):
-        print("--------")
-        print(coin_id)
-        print("--------")
         if ModelCoin.find_by_id(coin_id):
-            return {'message': "Coin id '{} already exists.".format(coin_id)}, 400
+            return {'message': "Coin id '{}' already exists.".format(coin_id)}, 400
 
         data = get_data_coin()
         coin = ModelCoin(coin_id, **data)
