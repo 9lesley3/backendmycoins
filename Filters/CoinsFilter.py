@@ -1,7 +1,4 @@
-from flask_restful import reqparse
-
-
-def normalize_path(value_min=0.0,
+def normalize_path_coins(value_min=0.0,
                    value_max=1000.0,
                    conservation_state=None,
                    country=None,
@@ -29,20 +26,6 @@ def normalize_path(value_min=0.0,
     return normalized_result
 
 
-def get_data_coins():
-    args = reqparse.RequestParser()
-    args.add_argument("value_min", type=float, default=0, location="args")
-    args.add_argument("value_max", type=float, default=1000, location="args")
-    args.add_argument("conservation_state", type=str, default=None, location="args")
-    args.add_argument("country", type=str, default=None, location="args")
-    args.add_argument("year_min", type=int, default=0, location="args")
-    args.add_argument("year_max", type=int, default=2022, location="args")
-    args.add_argument("limit", type=float, default=50, location="args")
-    args.add_argument("offset", type=float, default=0, location="args")
-
-    return args.parse_args()
-
-
 def get_query(params):
     query = "SELECT * FROM coins WHERE (value >= ? and value <= ?) "
     if params.get('conservation_state'):
@@ -54,16 +37,3 @@ def get_query(params):
     return query
 
 
-def result_to_json(result):
-    coins = []
-    for linha in result:
-        coins.append({
-            'coin_id': linha[0],
-            'description': linha[1],
-            'value': linha[2],
-            'conservation_state': linha[3],
-            'country': linha[4],
-            'year': linha[5]
-        })
-
-    return {'coins': coins}
