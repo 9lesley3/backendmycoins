@@ -18,3 +18,5 @@ setuptools~=58.1.0
 packaging~=21.3
 SQLAlchemy~=1.4.35
 passlib~=1.7.4
+resources~=0.0.1
+requests~=2.27.1

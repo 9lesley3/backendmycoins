@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
 from flask_restful import Api
-from resources.Coin import Coin
-from resources.Coins import Coins
-from resources.User import User
-from resources.UserRegister import UserRegister
-from resources.UserLogin import UserLogin
-from resources.UserLogout import UserLogout
+from resources.coins.Coin import Coin
+from resources.coins.Coins import Coins
+from resources.users.User import User
+from resources.users.UserRegister import UserRegister
+from resources.users.UserLogin import UserLogin
+from resources.users.UserLogout import UserLogout
+from resources.users.UserConfirmed import UserConfirmed
 from flask_jwt_extended import JWTManager
 from denylist import DENYLIST
 
@@ -40,6 +41,7 @@ api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
+api.add_resource(UserConfirmed, '/confirmation/<int:user_id>')
 
 
 if __name__ == '__main__':
