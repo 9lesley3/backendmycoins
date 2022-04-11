@@ -11,5 +11,9 @@ class UserRegister(Resource):
             return {'message': "The login '{}' already exists.".format(data['login'])}
 
         user = ModelUser(**data)
+        print("-----UserRegister-----")
+        print(user.login)
+        print(user.password)
+        print("----------")
         user.save_user()
         return {'message': 'User created successfully'}, 201
