@@ -64,8 +64,38 @@ def get_data_coins():
     return args.parse_args()
 
 
+def get_query(params):
+    if params.get('conservation_state') and params.get('country'):
+        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and conservation_state ? and country ? "\
+                "and (year >= ? and year <= ?) LIMIT ? OFFSET ? "
+    elif params.get('conservation_state'):
+        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and conservation_state ? and (year >= ? and " \
+                "year <= ?) LIMIT ? OFFSET ? "
+    elif params.get('country'):
+        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and country ? and (year >= ? and year <= ?) " \
+                "LIMIT ? OFFSET ? "
+    else:
+        return "SELECT * FROM coins WHERE (value >= ? and value <= ?) and (year >= ? and year <= ?) LIMIT ? OFFSET ? "
+
+
+def result_to_json(result):
+    coins = []
+    for linha in result:
+        coins.append({
+            'coin_id': linha[0],
+            'description': linha[1],
+            'value': linha[2],
+            'conservation_state': linha[3],
+            'country': linha[4],
+            'year': linha[5]
+        })
+
+    return {'coins': coins}
+
+
 class Coins(Resource):
-    def get(self):
+    @classmethod
+    def get(cls):
         connection = sqlite3.connect('coin_database.db')
         cursor = connection.cursor()
 
@@ -73,36 +103,9 @@ class Coins(Resource):
         # get only data valide
         data_valide = {key: data[key] for key in data if data[key] is not None}
         params = normalize_path(**data_valide)
-
-        if params.get('conservation_state') and params.get('country'):
-            query = """SELECT * FROM coins WHERE (value >= ? and value <= ?) and conservation_state ? and country ? """ \
-                    """and (year >= ? and year <= ?) LIMIT ? OFFSET ? """
-        elif params.get('conservation_state'):
-            query = """SELECT * FROM coins WHERE (value >= ? and value <= ?) and conservation_state ? """ \
-                    """and (year >= ? and year <= ?) LIMIT ? OFFSET ? """
-        elif params.get('country'):
-            query = """SELECT * FROM coins WHERE (value >= ? and value <= ?) and country ? """ \
-                    """and (year >= ? and year <= ?) LIMIT ? OFFSET ? """
-        else:
-            query = """SELECT * FROM coins WHERE (value >= ? and value <= ?) """ \
-                    """and (year >= ? and year <= ?) LIMIT ? OFFSET ? """
-
+        query = get_query(params)
         tuple_params = tuple([params[key] for key in params])
-        print("-------------")
-        print(query)
-        print(tuple_params)
-        print("-------------")
-        result = cursor.execute(query, tuple_params)
+        query_result = cursor.execute(query, tuple_params)
+        result = result_to_json(result=query_result)
 
-        coins = []
-        for linha in result:
-            coins.append({
-                'coin_id': linha[0],
-                'description': linha[1],
-                'value': linha[2],
-                'conservation_state': linha[3],
-                'country': linha[4],
-                'year': linha[5]
-            })
-
-        return {'coins': coins}
+        return result
