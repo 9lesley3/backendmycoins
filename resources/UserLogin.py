@@ -1,7 +1,8 @@
 from flask_restful import Resource
-from models.ModelUser import ModelUser, check_hashed_password, hash_password
+from models.ModelUser import ModelUser
 from data.DataUser import get_data_user
 from flask_jwt_extended import create_access_token
+from Hashing.UserHashing import hash_password, check_hashed_password
 
 
 class UserLogin(Resource):
