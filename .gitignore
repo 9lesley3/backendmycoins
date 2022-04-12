@@ -27,6 +27,7 @@ share/python-wheels/
 *.egg
 MANIFEST
 coin_database.db
+.idea/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
