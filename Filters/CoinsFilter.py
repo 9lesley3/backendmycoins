@@ -27,12 +27,12 @@ def normalize_path_coins(value_min=0.0,
 
 
 def get_query(params):
-    query = "SELECT * FROM coins WHERE (value >= ? and value <= ?) "
+    query = "SELECT * FROM coins WHERE (value >= %s and value <= %s) "
     if params.get('conservation_state'):
-        query += "and (conservation_state = ?) "
+        query += "and (conservation_state = %s) "
     if params.get('country'):
-        query += "and (country = ?) "
-    query += "and (year >= ? and year <= ?) LIMIT ? OFFSET ?"
+        query += "and (country = %s) "
+    query += "and (year >= %s and year <= %s) LIMIT %s OFFSET %s"
 
     return query
 

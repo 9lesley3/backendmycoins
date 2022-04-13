@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
-import sqlite3
+import psycopg2
 from Filters.CoinsFilter import normalize_path_coins, get_query
+import config
 
 
 def get_data_coins():
@@ -35,7 +36,11 @@ def result_to_json(result):
 class Coins(Resource):
     @classmethod
     def get(cls):
-        connection = sqlite3.connect('coin_database.db')
+        connection = psycopg2.connect(user=config.USER,
+                                      password=config.PASSWORD,
+                                      host=config.HOST,
+                                      port=config.PORT,
+                                      database=config.DATABASE)
         cursor = connection.cursor()
 
         data = get_data_coins()
@@ -44,7 +49,8 @@ class Coins(Resource):
         params = normalize_path_coins(**data_valide)
         query = get_query(params)
         tuple_params = tuple([params[key] for key in params])
-        query_result = cursor.execute(query, tuple_params)
+        cursor.execute(query, tuple_params)
+        query_result = cursor.fetchall()
         result = result_to_json(result=query_result)
 
         return result

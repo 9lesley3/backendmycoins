@@ -9,15 +9,24 @@ from resources.users.UserLogout import UserLogout
 from resources.users.UserConfirmed import UserConfirmed
 from flask_jwt_extended import JWTManager
 from denylist import DENYLIST
+# from sql_alchemy import database
+import config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coin_database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = 'JWT_SECRET_KEY'
-app.config['JWT_BLACKLIST_ENABLED'] = True
 
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{config.USER}:{config.PASSWORD}@{config.HOST}:\
+                                        {config.PORT}/{config.DATABASE}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY
+app.config['JWT_BLACKLIST_ENABLED'] = True
+# database.init_app(app)
 api = Api(app)
 jwt = JWTManager(app)
+
+
+@app.route('/')
+def index():
+    return '<h1>welcome!</h1?'
 
 
 @app.before_first_request
@@ -42,7 +51,6 @@ api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
 api.add_resource(UserConfirmed, '/confirmation/<int:user_id>')
-
 
 if __name__ == '__main__':
     from sql_alchemy import database
