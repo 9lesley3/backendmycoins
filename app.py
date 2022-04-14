@@ -14,8 +14,8 @@ import config
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{config.USER}:{config.PASSWORD}@{config.HOST}:\
-                                        {config.PORT}/{config.DATABASE}'
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
+# f'postgresql://{config.USER}:{config.PASSWORD}@{config.HOST}:{config.PORT}/{config.DATABASE}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY
 app.config['JWT_BLACKLIST_ENABLED'] = True
