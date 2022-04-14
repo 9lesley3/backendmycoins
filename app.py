@@ -13,7 +13,6 @@ from sql_alchemy import database
 import config
 
 app = Flask(__name__)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
 # f'postgresql://{config.USER}:{config.PASSWORD}@{config.HOST}:{config.PORT}/{config.DATABASE}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
