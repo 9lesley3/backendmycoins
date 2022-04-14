@@ -1,1 +1,1 @@
-heroku ps:scale web:gunicorn app:app
+web:gunicorn PHYSICS_COMMUNITY.wsgi
