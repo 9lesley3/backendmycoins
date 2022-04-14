@@ -36,7 +36,7 @@ def result_to_json(result):
 class Coins(Resource):
     @classmethod
     def get(cls):
-        connection = config.DATABASE_URL
+        connection = psycopg2.connect(config.DATABASE_URL)
         # connection = psycopg2.connect(user=config.USER,
         #                               password=config.PASSWORD,
         #                               host=config.HOST,
