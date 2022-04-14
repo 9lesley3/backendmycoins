@@ -1,22 +1,32 @@
 from flask import Flask, jsonify
 from flask_restful import Api
-from resources.Coin import Coin
-from resources.Coins import Coins
-from resources.User import User
-from resources.UserRegister import UserRegister
-from resources.UserLogin import UserLogin
-from resources.UserLogout import UserLogout
+from resources.coins.Coin import Coin
+from resources.coins.Coins import Coins
+from resources.users.User import User
+from resources.users.UserRegister import UserRegister
+from resources.users.UserLogin import UserLogin
+from resources.users.UserLogout import UserLogout
+from resources.users.UserConfirmed import UserConfirmed
 from flask_jwt_extended import JWTManager
 from denylist import DENYLIST
+from sql_alchemy import database
+import config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coin_database.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = 'JWT_SECRET_KEY'
-app.config['JWT_BLACKLIST_ENABLED'] = True
 
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
+# f'postgresql://{config.USER}:{config.PASSWORD}@{config.HOST}:{config.PORT}/{config.DATABASE}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = config.JWT_SECRET_KEY
+app.config['JWT_BLACKLIST_ENABLED'] = True
+database.init_app(app)
 api = Api(app)
 jwt = JWTManager(app)
+
+
+@app.route('/')
+def index():
+    return '<h1>welcome!</h1?'
 
 
 @app.before_first_request
@@ -40,9 +50,4 @@ api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
-
-
-if __name__ == '__main__':
-    from sql_alchemy import database
-    database.init_app(app)
-    app.run(debug=True)
+api.add_resource(UserConfirmed, '/confirmation/<int:user_id>')
