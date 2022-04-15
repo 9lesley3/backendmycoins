@@ -1,0 +1,39 @@
+{
+	"id": "a9737ab0-125a-451a-8073-ee5968372f14",
+	"name": "myCoins",
+	"values": [
+		{
+			"key": "TOKEN",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0OTk4OTg2OSwianRpIjoiMzNkOGRlN2EtMjdkYi00NDMwLWFlN2MtZWFlYjM1NmRjZmE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQ5OTg5ODY5LCJleHAiOjE2NDk5OTA3Njl9.73CCTKRbwiIJeB_XTpKf27KmceYtk0aGQLCx44KfV28",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "user_login",
+			"value": "ana",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "user_password",
+			"value": "12345",
+			"type": "text",
+			"enabled": true
+		},
+		{
+			"key": "tokenUrl",
+			"value": "https://restapimycoins.herokuapp.com/login",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "deleteUrl",
+			"value": "https://restapimycoins.herokuapp.com/coin/0",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-04-15T05:59:15.600Z",
+	"_postman_exported_using": "Postman/9.15.13"
+}
