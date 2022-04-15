@@ -13,8 +13,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  CAMINHO_PROJETO_WEBAPP: ./backendmycoins
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -28,5 +26,4 @@ jobs:
   
     - name: Testes da API REST com Newman
       run: |
-        cd ${{ env.CAMINHO_PROJETO_WEBAPP }}
         newman run https://www.getpostman.com/collections/b25bf2beeafb2415253c -e myCoins.environment.json
