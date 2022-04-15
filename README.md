@@ -84,6 +84,21 @@ PASSWORD
 DATABASE
 USER
 
+# Heroku
+Cria uma instancia no heroku
+heroku git:remote -a restapimycoins
+Cria banco de dados
+heroku addons:create heroku-postgresql:hobby-dev --app restapimycoins
+captura o endereço do banco de dados
+heroku config --app restapimycoins
+deploy
+git push heroku main
+login
+heroku login
+logs
+heroku logs --tail
+
+
 # Referencias
  - virtualenv - https://pythonacademy.com.br/blog/python-e-virtualenv-como-programar-em-ambientes-virtuais
  - Flask - https://flask.palletsprojects.com/en/2.1.x/
