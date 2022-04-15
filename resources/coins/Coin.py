@@ -45,5 +45,5 @@ class Coin(Resource):
         coin = ModelCoin.find_by_id(coin_id)
         if coin:
             coin.delete_coin()
-            return {'message': 'Coin deleted.'}
+            return {'message': 'Coin deleted.'}, 200
         return {'message': 'Coin not found.'}, 404

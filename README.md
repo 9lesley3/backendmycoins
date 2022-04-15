@@ -103,6 +103,7 @@ heroku logs --tail
  - virtualenv - https://pythonacademy.com.br/blog/python-e-virtualenv-como-programar-em-ambientes-virtuais
  - Flask - https://flask.palletsprojects.com/en/2.1.x/
  - Flask-Restful - https://flask-restful.readthedocs.io/en/latest/
+ - teste de apai - https://renatogroffe.medium.com/automatizando-testes-de-apis-rest-com-postman-newman-a90f0d90df09
 
 Para inicializar o serviço de API de o seguinte comando:
 python3 app.py
