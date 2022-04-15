@@ -29,4 +29,4 @@ jobs:
     - name: Testes da API REST com Newman
       run: |
         cd ${{ env.CAMINHO_PROJETO_WEBAPP }}
-        newman run https://www.getpostman.com/collections/b25bf2beeafb2415253c
+        newman run https://www.getpostman.com/collections/b25bf2beeafb2415253c -e myCoins.environment.json
