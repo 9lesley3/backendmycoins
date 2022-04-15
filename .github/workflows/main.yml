@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  CAMINHO_PROJETO_WEBAPP: ./test
+  PATH_ARQ_TEST: ./test
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
