@@ -15,7 +15,7 @@ class UserRegister(Resource):
             return {'message': "The email ({}) already exists.".format(data['email'])}, 400
 
         if not data.get('login') or data.get('login') is None or (data.get('login') == ""):
-            return {'message': 'The field email cannot be left blank'}, 400
+            return {'message': 'The login email cannot be left blank'}, 400
 
         if ModelUser.find_by_login(data['login']):
             return {'message': "The login ({}) already exists.".format(data['login'])}, 400

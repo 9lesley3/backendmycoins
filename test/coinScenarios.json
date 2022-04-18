@@ -1,18 +1,38 @@
 [
   {
     "coin_id": 1,
-    "login": "ana",
-    "email": "lesleydsilva@hotmail.com"
+    "login": "juru",
+    "password": "123",
+    "email": "lfsJoy1@hotmail.com"
   },
   {
     "coin_id": 2,
-    "login": "lesley",
-    "email": "lesleydsilva@hotmail.com"
+    "login": "",
+    "password": "123",
+    "email": "lfsJoy1@hotmail.com"
   },
   {
     "coin_id": 3,
-    "login": "ferreira",
-    "password": "12345",
-    "email": "lfsJoy@hotmail.com"
+    "login": "juruuuuuu",
+    "password": "123",
+    "email": "lfsJoy1@hotmail.com"
+  },
+  {
+    "coin_id": 4,
+    "login": "juruuuuuu",
+    "password": "123",
+    "email": ""
+  },
+  {
+    "coin_id": 5,
+    "login": "juruuuuuu",
+    "password": "",
+    "email": "lfsJoy1@hotmail.com"
+  },
+  {
+    "coin_id": 6,
+    "login": "juruuuuuu",
+    "password": "123",
+    "email": "lfsJoyBoy1@hotmail.com"
   }
 ]
