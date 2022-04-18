@@ -17,7 +17,8 @@ class ModelUser(database.Model):
     email = database.Column(database.String(40), nullable=False, unique=True)
     activated = database.Column(database.Boolean, default=False)
 
-    def __init__(self, login, password, email, activated):
+    def __init__(self, user_id, login, password, email, activated):
+        self.user_id = user_id
         self.login = login
         self.password = password
         self.email = email

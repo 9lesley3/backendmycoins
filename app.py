@@ -46,7 +46,7 @@ def token_access_invalidated(jwt_header, jwt_payload):
 api.add_resource(Coins, '/coins')
 api.add_resource(Coin, '/coin/<int:coin_id>')
 api.add_resource(User, '/user/<int:user_id>')
-api.add_resource(UserRegister, '/register')
+api.add_resource(UserRegister, '/register/<int:user_id>')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
 api.add_resource(UserConfirmed, '/confirmation/<int:user_id>')

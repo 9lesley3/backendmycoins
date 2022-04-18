@@ -6,7 +6,7 @@ from data.DataUser import get_data_user
 
 class UserRegister(Resource):
     # /register
-    def post(self):
+    def post(self, user_id):
         data = get_data_user()
         if not data.get('email') or data.get('email') is None:
             return {'message': 'The field email cannot be left blank'}, 400
@@ -23,7 +23,7 @@ class UserRegister(Resource):
         if not data.get('password') or data.get('password') is None or (data.get('password') == ""):
             return {'message': 'The field password cannot be left blank'}, 400
 
-        user = ModelUser(**data)
+        user = ModelUser(user_id, **data)
         user.activated = False
         try:
             user.save_user()
