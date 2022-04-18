@@ -8,7 +8,7 @@ class User(Resource):
     def get(self, user_id):
         user = ModelUser.find_by_id(user_id)
         if user:
-            return user.to_json()
+            return user.to_json(), 200
         return {'message': 'User not found.'}, 404
 
     @jwt_required()

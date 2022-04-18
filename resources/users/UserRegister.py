@@ -12,10 +12,16 @@ class UserRegister(Resource):
             return {'message': 'The field email cannot be left blank'}, 400
 
         if ModelUser.find_by_email(data['email']):
-            return {'message': "The email '{}' already exists.".format(data['email'])}, 400
+            return {'message': "The email ({}) already exists.".format(data['email'])}, 400
+
+        if not data.get('login') or data.get('login') is None or (data.get('login') == ""):
+            return {'message': 'The field email cannot be left blank'}, 400
 
         if ModelUser.find_by_login(data['login']):
-            return {'message': "The login '{}' already exists.".format(data['login'])}, 400
+            return {'message': "The login ({}) already exists.".format(data['login'])}, 400
+
+        if not data.get('password') or data.get('password') is None or (data.get('password') == ""):
+            return {'message': 'The field password cannot be left blank'}, 400
 
         user = ModelUser(**data)
         user.activated = False
@@ -27,4 +33,4 @@ class UserRegister(Resource):
             traceback.print_exc()
             return {'message': 'An internal server error has occurred.'}, 500
 
-        return {'message': 'User created successfully'}, 201
+        return user.to_json(), 201

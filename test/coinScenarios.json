@@ -1,8 +1,18 @@
 [
   {
-    "coin_id": 0
+    "coin_id": 1,
+    "login": "ana",
+    "email": "lesleydsilva@hotmail.com"
   },
   {
-    "coin_id": 1
+    "coin_id": 2,
+    "login": "lesley",
+    "email": "lesleydsilva@hotmail.com"
+  },
+  {
+    "coin_id": 3,
+    "login": "ferreira",
+    "password": "12345",
+    "email": "lfsJoy@hotmail.com"
   }
 ]
