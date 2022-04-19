@@ -3,19 +3,19 @@
 	"name": "myCoins",
 	"values": [
 		{
-			"key": "TOKEN",
+			"key": "token",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0OTk4OTg2OSwianRpIjoiMzNkOGRlN2EtMjdkYi00NDMwLWFlN2MtZWFlYjM1NmRjZmE3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQ5OTg5ODY5LCJleHAiOjE2NDk5OTA3Njl9.73CCTKRbwiIJeB_XTpKf27KmceYtk0aGQLCx44KfV28",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "user_login",
+			"key": "userLogin",
 			"value": "ana",
 			"type": "text",
 			"enabled": true
 		},
 		{
-			"key": "user_password",
+			"key": "userPassword",
 			"value": "12345",
 			"type": "text",
 			"enabled": true
@@ -27,13 +27,13 @@
 			"enabled": true
 		},
 		{
-			"key": "deleteUrl",
+			"key": "deleteCoinUrl",
 			"value": "https://restapimycoins.herokuapp.com/coin/0",
 			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "coin_id",
+			"key": "id",
 			"value": "0",
 			"type": "default",
 			"enabled": true
@@ -49,9 +49,63 @@
 			"value": "Bearer ",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "logoutUrl",
+			"value": "https://restapimycoins.herokuapp.com/logout",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "useEmail",
+			"value": "lesleydsilva@hotmail.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "deleteUserUrl",
+			"value": "https://restapimycoins.herokuapp.com/user/0",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "createUserUrl",
+			"value": "https://restapimycoins.herokuapp.com/register/0",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "activated",
+			"value": "false",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "getUserUrl",
+			"value": "https://restapimycoins.herokuapp.com/user/0",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "coin_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "userEmail",
+			"value": "",
+			"type": "any",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2022-04-15T19:41:22.588Z",
+	"_postman_exported_at": "2022-04-19T13:34:23.240Z",
 	"_postman_exported_using": "Postman/9.15.13"
 }
