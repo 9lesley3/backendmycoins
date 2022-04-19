@@ -26,7 +26,17 @@ jobs:
     - uses: actions/checkout@v2
 
   
-    - name: Testes da API REST com Newman
+    - name: Testes da API REST myCoins collections mycoins
       run: |
         cd ${{ env.PATH_ARQ_TEST }}
         newman run https://www.getpostman.com/collections/b25bf2beeafb2415253c -e myCoins.environment.json -d coinScenarios.json
+
+  - name: Testes da API REST myCoins collections searchCoinsWithFilter
+      run: |
+        cd ${{ env.PATH_ARQ_TEST }}
+        newman run https://www.getpostman.com/collections/bee61346a6a4d37fd282 -e myCoins.environment.json -d coinScenarios.json
+
+  - name: Testes da API REST myCoins collections userMyCoinsLogin
+      run: |
+        cd ${{ env.PATH_ARQ_TEST }}
+        newman run https://www.getpostman.com/collections/c73d28b97ee6ebc9a424 -e myCoins.environment.json -d coinScenarios.jsonn
