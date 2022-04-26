@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install newmam
         run: |
-          get install node
+          install node
           newman --version
           npm install -g newman-reporter-html
 
