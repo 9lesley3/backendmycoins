@@ -23,6 +23,7 @@ jobs:
       - name: Install newmam
         run: |
           npm update
+          npm audit fix
           newman --version
           npm install -g newman-reporter-html
 
