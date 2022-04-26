@@ -5,8 +5,7 @@ deploy_main:
 
 ### Deploy dev branch ###
 deploy_dev:
-	git push heroku main
-	git push origin main
+	git push origin dev
 
 ### Test collections mycoins ###
 test_my_coins:
