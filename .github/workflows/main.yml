@@ -17,12 +17,10 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build-tests-push:
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
 
       - name: Testes da API REST myCoins collections mycoins
         run: newman run https://www.getpostman.com/collections/b25bf2beeafb2415253c -e myCoins.environment.json -d coinScenarios.json -r htmlextra --reporter-htmlextra-export reports/newman/html/test_my_coins.html
@@ -33,7 +31,11 @@ jobs:
       - name: Testes da API REST myCoins collections userMyCoinsLogin
         run: newman run https://www.getpostman.com/collections/c73d28b97ee6ebc9a424 -e myCoins.environment.json -d coinScenarios.json -r htmlextra --reporter-htmlextra-export reports/newman/html/test_user_my_coins_login.html
 
-      - name: Heroku deploy
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_PROJECT_NAME}}
