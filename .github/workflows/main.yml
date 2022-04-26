@@ -20,7 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        run: npm install -g newman-reporter-html
+      - name: Install newmam
+        run: |
+          newman --version
+          npm install -g newman-reporter-html
+
       - name: Testes da API REST myCoins collections mycoins
         run: newman run https://www.getpostman.com/collections/b25bf2beeafb2415253c -e myCoins.environment.json -d coinScenarios.json -r htmlextra --reporter-htmlextra-export reports/newman/html/test_my_coins.html
 
